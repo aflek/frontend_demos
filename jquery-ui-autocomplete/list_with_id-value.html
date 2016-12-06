@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Autocomplete: Using Label-Value Pairs</title>
+
+	<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/ui-darkness/jquery-ui.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+
+<!--  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https:/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+  
+</head>
+<body>
+ 
+<div class="ui-widget">
+
+  <input id="autocomplete1" type="text" placeholder="Город, отель" name="code">
+
+  <label for="tags_label">Город, отель: </label>
+  <input id="tags_label" type="text" placeholder="Город, отель">
+  <input id="tags_value" type="text" name="code">
+
+</div>
+ 
+<script>
+  $( function() {
+    var data = [
+      {value: "0", label: "Москва"},
+      {value: "1", label: "Санкт-Петербург"},
+      {value: "2", label: "Воронеж"},
+      {value: "3", label: "Нижний Новгород"},
+      {value: "4", label: "Астрахань"},
+      {value: "5", label: "Норильск"},
+      {value: "6", label: "Новосибирск"},
+      {value: "7", label: "Томск"},
+      {value: "8", label: "Екатеринбург"},
+      {value: "9", label: "Рязань"},
+      {value: "10", label: "Ростов на Дону"},
+      {value: "11", label: "Тверь"},
+      {value: "12", label: "Пенза"},
+      {value: "13", label: "Нижневартовск"},
+      {value: "14", label: "Самара"},
+      {value: "15", label: "Тольятти"},
+      {value: "16", label: "Тюмень"},
+      {value: "17", label: "Севастополь"},
+      {value: "18", label: "Евпатория"},
+      {value: "19", label: "Симферополь"},
+      {value: "20", label: "Ялта"},
+      {value: "21", label: "Алушта"}
+    ];
+    $(function() {
+       $("#autocomplete1").autocomplete({
+	 source: data
+       });
+
+       $( "#tags_label" ).autocomplete({
+         source: data,
+         minLength: 2,
+         focus: function(event, ui) {
+	   // prevent autocomplete from updating the textbox
+	   event.preventDefault();
+	   // manually update the textbox
+	   $(this).val(ui.item.label);
+         },
+         select: function(event, ui) {
+	   // prevent autocomplete from updating the textbox
+	   event.preventDefault();
+	   // manually update the textbox and hidden field
+	   $(this).val(ui.item.label);
+	   $("#tags_value").val(ui.item.value);
+         }
+      		
+      });
+ 
+     });
+  });
+  </script>
+
+ 
+</body>
+</html>
